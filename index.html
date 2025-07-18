@@ -96,6 +96,20 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
+
+
+  <!-- 🎶 Audio Element (hidden by default) -->
+<audio id="bg-music" loop>
+  <source src="assets/mix_1m43s.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+<!-- 🔊 Tombol Melayang -->
+<button onclick="toggleMusic()" id="music-toggle"
+  class="fixed bottom-6 right-6 bg-[#D8BFD8] text-white rounded-full p-3 shadow-lg hover:bg-[#BA55D3] transition">
+  🔈
+</button>
+
   <!-- Header with Confetti Animation -->
   <header class="relative text-center py-12">
     <div class="ribbon"></div>
@@ -262,5 +276,31 @@
       entries.innerHTML = localStorage.getItem('diaryEntries') || '';
     };
   </script>
+
+  <script>
+  let isPlaying = false;
+  const music = document.getElementById('bg-music');
+  const button = document.getElementById('music-toggle');
+
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+      button.innerHTML = '🔈'; // ikon off
+    } else {
+      music.play();
+      button.innerHTML = '🔊'; // ikon on
+    }
+    isPlaying = !isPlaying;
+  }
+</script>
+
+  <script>
+  window.addEventListener("load", () => {
+    music.play().catch(() => {
+      // Browser minta interaksi dulu, makanya harus diklik dulu kadang
+    });
+  });
+</script>
+
 </body>
 </html>

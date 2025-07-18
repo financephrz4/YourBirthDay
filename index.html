@@ -292,6 +292,13 @@
     }
     isPlaying = !isPlaying;
   }
+
+    // ⏯ Auto play saat halaman dibuka
+    window.addEventListener("load", () => {
+      music.play().catch(() => {
+        // Kalau autoplay dicegah, user perlu klik dulu
+      });
+    });
 </script>
 
  

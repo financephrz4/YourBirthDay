@@ -2,42 +2,132 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Halaman Utama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surat Ulang Tahun untukmu</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #fff0f5;
-      font-family: 'Poppins', sans-serif;
-      animation: fadeIn 2s ease-in;
+      background: linear-gradient(135deg, #f5e1ee 0%, #f5f7fa 100%);
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
     }
-
+    .card {
+      animation: fadeIn 1s ease-in-out;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 90%;
+      width: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="2" fill="%23ffb7c5"/%3E%3Ccircle cx="90" cy="20" r="3" fill="%23a29bfe"/%3E%3Ccircle cx="30" cy="80" r="2" fill="%23ff7675"/%3E%3C/svg%3E');
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #6b46c1;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+    .btn {
+      background: linear-gradient(to right, #ed64a6, #9f7aea);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.5rem;
+        width: 95%;
+        margin: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .card {
+        padding: 2rem;
+        width: 80%;
+        max-width: 500px;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.125rem;
+      }
+      .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+      }
+    }
+    @media (min-width: 1025px) {
+      .card {
+        padding: 2.5rem;
+        width: 450px;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.25rem;
+      }
+      .btn {
+        padding: 0.75rem 2.5rem;
+        font-size: 1.125rem;
+      }
+    }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-
-  <div class="bg-white p-8 rounded shadow-lg text-center max-w-lg">
-    <h1 class="text-3xl font-bold text-[#C71585] mb-4">Hai Julianti 🌸</h1>
-    <p class="text-[#8B008B] text-lg mb-4">Terima kasih sudah membuka surat ini. 🎶</p>
-    <p class="text-[#4B0082] mb-4">Semoga hari-harimu seindah bunga yang sedang mekar 💐</p>
+<body>
+  <div class="card text-center">
+    <h1 class="text-4xl font-bold mb-4">Untuk Julianti Dwingsih 🎉</h1>
+    <p class="text-lg mb-6">Di hari spesialmu ini, ada secarik surat penuh harapan dan kehangatan yang menantimu. Siap membaca cerita kecil untukmu?</p>
+    <button onclick="openMainPage()" class="btn text-white py-2 px-6 rounded-full font-medium">
+      Buka Suratmu 💖
+    </button>
   </div>
 
-  <audio id="bgMusic" src="lagumu.mp3" preload="auto"></audio>
-
   <script>
-    // Periksa apakah dibuka dari tombol "Buka Surat"
-    if (localStorage.getItem('openByLetter') === 'yes') {
-      const audio = document.getElementById('bgMusic');
-      audio.play().catch(err => {
-        console.log("Autoplay gagal, browser memblokir audio sebelum interaksi");
-      });
-      // Hapus flag supaya tidak autoplay terus kalau reload
-      localStorage.removeItem('openByLetter');
+    function openMainPage() {
+      localStorage.setItem('openByLetter', 'yes');
+      window.location.href = './main.html';
     }
   </script>
-
 </body>
 </html>

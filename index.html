@@ -2,30 +2,40 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Surat Untukmu</title>
+  <title>Halaman Utama</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: #fff5f7;
+      background: #fff0f5;
       font-family: 'Poppins', sans-serif;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
 
   <div class="bg-white p-8 rounded shadow-lg text-center max-w-lg">
-    <h1 class="text-3xl font-bold text-[#4B0082] mb-4">Untuk Julianti Dwingsih 💌</h1>
-    <p class="text-[#6A5ACD] text-lg mb-6">Ada surat kecil yang aku tulis khusus buat kamu. Mau baca?</p>
-    <button onclick="openMainPage()" class="bg-pink-400 text-white py-2 px-6 rounded-full hover:bg-pink-500 transition">
-      Buka Surat ✨
-    </button>
+    <h1 class="text-3xl font-bold text-[#C71585] mb-4">Hai Julianti 🌸</h1>
+    <p class="text-[#8B008B] text-lg mb-4">Terima kasih sudah membuka surat ini. 🎶</p>
+    <p class="text-[#4B0082] mb-4">Semoga hari-harimu seindah bunga yang sedang mekar 💐</p>
   </div>
 
+  <audio id="bgMusic" src="lagumu.mp3" preload="auto"></audio>
+
   <script>
-    function openMainPage() {
-      // Simpan ke localStorage sebagai trigger
-      localStorage.setItem('openByLetter', 'yes');
-      window.location.href = './main.html'; // halaman utama kamu
+    // Periksa apakah dibuka dari tombol "Buka Surat"
+    if (localStorage.getItem('openByLetter') === 'yes') {
+      const audio = document.getElementById('bgMusic');
+      audio.play().catch(err => {
+        console.log("Autoplay gagal, browser memblokir audio sebelum interaksi");
+      });
+      // Hapus flag supaya tidak autoplay terus kalau reload
+      localStorage.removeItem('openByLetter');
     }
   </script>
 

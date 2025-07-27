@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Surat Untukmu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #fff5f7;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-8 rounded shadow-lg text-center max-w-lg">
+    <h1 class="text-3xl font-bold text-[#4B0082] mb-4">Untuk Julianti Dwingsih 💌</h1>
+    <p class="text-[#6A5ACD] text-lg mb-6">Ada surat kecil yang aku tulis khusus buat kamu. Mau baca?</p>
+    <button onclick="openMainPage()" class="bg-pink-400 text-white py-2 px-6 rounded-full hover:bg-pink-500 transition">
+      Buka Surat ✨
+    </button>
+  </div>
+
+  <script>
+    function openMainPage() {
+      // Simpan ke localStorage sebagai trigger
+      localStorage.setItem('openByLetter', 'yes');
+      window.location.href = 'index.html'; // halaman utama kamu
+    }
+  </script>
+
+</body>
+</html>

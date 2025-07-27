@@ -98,17 +98,8 @@
 <body class="min-h-screen flex flex-col">
 
 
-  <!-- 🎶 Audio Element (hidden by default) -->
-<audio id="bg-music" loop>
-  <source src="assets/mix_1m43s.mp3" type="audio/mpeg">
-  Your browser does not support the audio tag.
-</audio>
+  
 
-<!-- 🔊 Tombol Melayang -->
-<button onclick="toggleMusic()" id="music-toggle"
-  class="fixed bottom-6 right-6 bg-[#D8BFD8] text-white rounded-full p-3 shadow-lg hover:bg-[#BA55D3] transition">
-  🔊
-</button>
 
   <!-- Header with Confetti Animation -->
   <header class="relative text-center py-12">
@@ -277,31 +268,56 @@
     };
   </script>
 
-  <script>
-  let isPlaying = false;
+  <!-- 🎶 Musik & Tombol Kontrol -->
+<audio id="bg-music" loop>
+  <source src="assets/mix_1m43s.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="toggleMusic()" id="music-toggle"
+  class="fixed bottom-6 right-6 bg-[#D8BFD8] text-white rounded-full p-3 shadow-lg hover:bg-[#BA55D3] transition">
+  🔊
+</button>
+
+<!-- SCRIPT UNTUK TOGGLE MANUAL -->
+<script>
+let isPlaying = false;
+const music = document.getElementById('bg-music');
+const button = document.getElementById('music-toggle');
+
+function toggleMusic() {
+  if (isPlaying) {
+    music.pause();
+    button.innerHTML = '🔈';
+  } else {
+    music.play();
+    button.innerHTML = '🔊';
+  }
+  isPlaying = !isPlaying;
+}
+</script>
+
+<!-- ✅ SCRIPT UNTUK AUTOPLAY SETELAH DARI SURAT -->
+<script>
+window.addEventListener("load", () => {
   const music = document.getElementById('bg-music');
   const button = document.getElementById('music-toggle');
 
-  function toggleMusic() {
-    if (isPlaying) {
-      music.pause();
-      button.innerHTML = '🔈'; // ikon off
-    } else {
-      music.play();
-      button.innerHTML = '🔊'; // ikon on
-    }
-    isPlaying = !isPlaying;
-  }
-
-    // ⏯ Auto play saat halaman dibuka
-    window.addEventListener("load", () => {
-      music.play().catch(() => {
-        // Kalau autoplay dicegah, user perlu klik dulu
+  if (localStorage.getItem('openByLetter') === 'yes') {
+    music.play()
+      .then(() => {
+        isPlaying = true;
+        button.innerHTML = '🔊';
+        localStorage.removeItem('openByLetter');
+      })
+      .catch((err) => {
+        console.warn("Autoplay masih dicegah:", err);
       });
-    });
+  }
+});
 </script>
-
- 
 
 </body>
 </html>
+
+ 
+

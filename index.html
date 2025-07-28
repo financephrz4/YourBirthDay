@@ -284,7 +284,7 @@
       <p>> DECRYPTING MESSAGE...</p>
     </div>
     <div class="progress-bar mb-4"></div>
-    <p class="text-yellow-400">> ACCESS GRANTED: <span id="countdown" class="text-white">REDIRECTING IN 3</span></p>
+    <p class="text-yellow-400">> ACCESS GRANTED: <span id="countdown" class="text-white">REDIRECTING IN 10</span></p>
   </div>
   
   <!-- INITIAL SCREEN -->
@@ -303,24 +303,33 @@
   <!-- CAKE SCREEN -->
   <div id="cakeScreen" class="cake-container">
     <div class="cake">
-      <div class="plate"></div>
-      <div class="layer layer-bottom"></div>
-      <div class="layer layer-middle"></div>
-      <div class="layer layer-top"></div>
-      <div class="icing">
-        <div class="sprinkles"></div>
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing">
+          <div class="sprinkles"></div>
+        </div>
+        <div class="whipped-cream whipped-cream-1"></div>
+        <div class="whipped-cream whipped-cream-2"></div>
+        <div class="cherry"></div>
+        <div class="candle candle-1">
+          <div class="flame" onclick="extinguishFlame(this)"></div>
+        </div>
+        <div class="candle candle-2">
+          <div class="flame" onclick="extinguishFlame(this)"></div>
+        </div>
+        <div class="candle candle-3">
+          <div class="flame" onclick="extinguishFlame(this)"></div>
+        </div>
+        <div class="sparkles">
+          <div class="sparkle sparkle-1"></div>
+          <div class="sparkle sparkle-2"></div>
+          <div class="sparkle sparkle-3"></div>
+          <div class="sparkle sparkle-4"></div>
+        </div>
       </div>
-      <div class="candle candle-1">
-        <div class="flame" onclick="extinguishFlame(this)"></div>
-      </div>
-      <div class="candle candle-2">
-        <div class="flame" onclick="extinguishFlame(this)"></div>
-      </div>
-      <div class="candle candle-3">
-        <div class="flame" onclick="extinguishFlame(this)"></div>
-      </div>
-    </div>
-    <p id="instructions" class="instructions">Click on the flames to blow out the candles...</p>
+    <p id="instructions" class="instructions">Click the candle flames to blow them out / Klik api lilin untuk mematikannya...</p>  
   </div>
 
   <script>
@@ -376,7 +385,7 @@
       
       if (flamesExtinguished === totalFlames) {
         // All candles blown out
-        document.getElementById('instructions').textContent = "Happy... Wait, what was I saying?";
+        document.getElementById('instructions').textContent = "Happy... Wait, what was I saying? / Selamat... Tunggu, apa yang saya bilang?";
         
         // Show confetti
         confetti({

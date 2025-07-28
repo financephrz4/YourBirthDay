@@ -1,122 +1,181 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Memuat...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚠️ WARNING: SYSTEM BREACH DETECTED ⚠️</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    
     body {
-      background: black;
-      color: #00ff88;
-      font-family: 'Courier New', monospace;
-      overflow: hidden;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Share Tech Mono', monospace;
       margin: 0;
-    }
-
-    .glitch {
-      font-size: 1.2rem;
-      white-space: pre-wrap;
       overflow: hidden;
-      border-right: 2px solid #00ff88;
-      width: 0;
-      animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
     }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    
+    .glitch {
+      position: relative;
+      animation: glitch 1s linear infinite;
     }
-
+    
+    @keyframes glitch {
+      0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff; }
+      14% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff; }
+      15% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff; }
+      49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff; }
+      50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff; }
+      99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff; }
+      100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff; }
+    }
+    
+    .terminal {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #0f0;
+      box-shadow: 0 0 10px #0f0;
+    }
+    
+    .cursor {
+      animation: blink 1s step-end infinite;
+    }
+    
     @keyframes blink {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #00ff88 }
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
     }
-
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    
+    .progress-bar {
+      height: 2px;
+      background-color: #0f0;
+      animation: progress 2.8s linear forwards;
     }
-
-    .noise {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
-      opacity: 0.05;
-      z-index: 0;
-      pointer-events: none;
+    
+    @keyframes progress {
+      from { width: 0%; }
+      to { width: 100%; }
     }
-
-    .scanline {
+    
+    .matrix-rain {
       position: absolute;
       top: 0;
+      left: 0;
       width: 100%;
-      height: 2px;
-      background: rgba(0,255,0,0.2);
-      animation: scanline 3s linear infinite;
-      z-index: 2;
-    }
-
-    @keyframes scanline {
-      0% { top: 0; }
-      100% { top: 100%; }
-    }
-
-    .fake-terminal {
-      z-index: 1;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.3;
     }
   </style>
 </head>
-<body>
-
-  <div class="noise"></div>
-  <div class="scanline"></div>
-
-  <div class="overlay">
-    <div class="fake-terminal px-6 py-4">
-      <p class="glitch" id="terminalText"></p>
+<body class="flex items-center justify-center min-h-screen">
+  <!-- MATRIX RAIN EFFECT -->
+  <canvas id="matrix" class="matrix-rain"></canvas>
+  
+  <!-- HACKER TERMINAL -->
+  <div id="terminal" class="terminal p-6 max-w-2xl mx-auto hidden">
+    <div class="mb-4">
+      <p class="text-red-500">> WARNING: UNAUTHORIZED ACCESS DETECTED</p>
+      <p class="text-red-500">> SYSTEM BREACH IN PROGRESS</p>
+      <p>> INITIATING COUNTERMEASURES...</p>
+      <p>> FAILED TO STOP INTRUSION</p>
+      <p class="text-green-500">> CONNECTION ESTABLISHED</p>
+      <p>> DECRYPTING MESSAGE...</p>
     </div>
+    <div class="progress-bar mb-4"></div>
+    <p class="text-yellow-400">> ACCESS GRANTED: <span id="countdown" class="text-white">REDIRECTING IN 3</span></p>
+  </div>
+  
+  <!-- INITIAL SCREEN -->
+  <div id="warning" class="text-center p-6 max-w-2xl mx-auto">
+    <h1 class="glitch text-4xl font-bold mb-6 text-red-500">⚠️ SYSTEM COMPROMISED ⚠️</h1>
+    <div class="mb-6">
+      <p class="mb-2">> Critical security alert triggered</p>
+      <p class="mb-2">> Your device may be at risk</p>
+      <p>> Proceed with caution</p>
+    </div>
+    <button onclick="initiateHackSequence()" class="bg-black text-green-500 border border-green-500 py-2 px-6 font-mono hover:bg-green-900 hover:text-white transition-all">
+      > INITIATE RECOVERY PROTOCOL
+    </button>
   </div>
 
   <script>
-    const lines = [
-      "Mengakses sistem...",
-      "Mem-bypass proteksi...",
-      "Menembus firewall...",
-      "Mengambil data terenkripsi...",
-      "Dekripsi kode berhasil...",
-      "Membuka portal..."
-    ];
-
-    let currentLine = 0;
-    let terminal = document.getElementById("terminalText");
-
-    function typeLine() {
-      if (currentLine < lines.length) {
-        terminal.classList.remove("glitch"); // reset animation
-        void terminal.offsetWidth; // reflow
-        terminal.textContent = lines[currentLine];
-        terminal.classList.add("glitch");
-        currentLine++;
-        setTimeout(typeLine, 2200);
-      } else {
-        setTimeout(() => {
-          window.location.href = './main.html';
-        }, 2000);
-      }
+    // Matrix rain effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVXYZ';
+    const nums = '0123456789';
+    
+    const alphabet = katakana + latin + nums;
+    
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    
+    const rainDrops = [];
+    
+    for (let x = 0; x < columns; x++) {
+      rainDrops[x] = 1;
     }
-
-    window.onload = () => {
-      setTimeout(typeLine, 1000);
+    
+    const draw = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+      
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+        
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
     };
+    
+    setInterval(draw, 30);
+    
+    // Hacker effect
+    function initiateHackSequence() {
+      document.getElementById('warning').classList.add('hidden');
+      document.getElementById('terminal').classList.remove('hidden');
+      
+      // Simulate typing effect
+      const countdown = document.getElementById('countdown');
+      let seconds = 3;
+      
+      const timer = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          countdown.textContent = `REDIRECTING IN ${seconds}`;
+        } else {
+          clearInterval(timer);
+          countdown.textContent = 'REDIRECTING NOW...';
+          setTimeout(() => {
+            window.location.href = './main.html';
+          }, 800);
+        }
+      }, 1000);
+      
+      // Random terminal text effect
+      const terminal = document.getElementById('terminal');
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const p = document.createElement('p');
+          p.textContent = '> ' + Math.random().toString(36).substring(2, 15) + ' ' + Math.random().toString(36).substring(2, 8);
+          p.className = 'text-green-400';
+          terminal.appendChild(p);
+          terminal.scrollTop = terminal.scrollHeight;
+        }
+      }, 300);
+    }
   </script>
 </body>
 </html>

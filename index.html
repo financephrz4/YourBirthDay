@@ -23,99 +23,138 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-      /* Tambahan untuk kue */
-        .cake {
-          position: relative;
-          width: 250px;
-          height: 200px;
-          margin: 0 auto 20px auto;
-        }
-        
-        .plate {
-          width: 270px;
-          height: 110px;
-          position: absolute;
-          bottom: -10px;
-          left: -10px;
-          background-color: #ccc;
-          border-radius: 50%;
-          box-shadow: 0 2px 0 #b3b3b3, 0 4px 0 #b3b3b3, 0 5px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .cake > * {
-          position: absolute;
-        }
-        
-        .layer {
-          width: 250px;
-          height: 100px;
-          border-radius: 50%;
-          background-color: #ffc2d1;
-          box-shadow: 0 2px 0px #fb6f92, 0 4px 0px #ff8fab, 0 6px 0px #ff8fab, 0 8px 0px #ff8fab, 0 10px 0px #ff8fab, 0 12px 0px #ff8fab;
-        }
-        
-        .layer-top {
-          top: 0px;
-        }
-        .layer-middle {
-          top: 33px;
-        }
-        .layer-bottom {
-          top: 66px;
-        }
-        
-        .icing {
-          top: 2px;
-          left: 5px;
-          background-color: #f0e4d0;
-          width: 240px;
-          height: 90px;
-          border-radius: 50%;
-        }
-        .icing:before {
-          content: "";
-          position: absolute;
-          top: 4px;
-          right: 5px;
-          bottom: 6px;
-          left: 5px;
-          background-color: #f4ebdc;
-          box-shadow: 0 0 4px #f6efe3;
-          border-radius: 50%;
-          z-index: 1;
-        }
+    /* Cake styles */
+    .cake {
+      position: relative;
+      width: 280px;
+      height: 220px;
+      margin: 20px auto;
+      animation: popIn 0.8s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .plate {
+      width: 300px;
+      height: 120px;
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(#d9d9d9, #b3b3b3);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .cake > * {
+      position: absolute;
+    }
+
+    .layer {
+      width: 280px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(#ff99ac, #ff6f92);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .layer-top {
+      top: 0;
+      width: 240px;
+      left: 20px;
+    }
+
+    .layer-middle {
+      top: 40px;
+      width: 260px;
+      left: 10px;
+    }
+
+    .layer-bottom {
+      top: 80px;
+    }
+
+    .icing {
+      top: 0;
+      left: 20px;
+      background: linear-gradient(#fff5e6, #f0e4d0);
+      width: 240px;
+      height: 80px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icing::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 5px;
+      bottom: 6px;
+      left: 5px;
+      background: linear-gradient(#fffaf0, #f4ebdc);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .icing::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 20px;
+      background: radial-gradient(circle at top, #f0e4d0 20%, transparent 70%);
+      z-index: 2;
+    }
+
+    .sprinkles {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      height: 60px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="2" fill="red"/><circle cx="15" cy="10" r="2" fill="yellow"/><circle cx="10" cy="20" r="2" fill="blue"/></svg>') repeat;
+      background-size: 20px 20px;
+      z-index: 3;
+    }
 
     .candle {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 40px;
-  background: #fff;
-  border-radius: 5px;
-  z-index: 10;
-}
+      position: absolute;
+      top: 20px;
+      width: 12px;
+      height: 50px;
+      background: linear-gradient(90deg, #fff, #f0f0f0);
+      border-radius: 6px;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.flame {
-    width: 20px;
-    height: 30px;
-    background: radial-gradient(circle, orange 40%, red 70%, transparent 80%);
-    border-radius: 50% 50% 50% 50%;
-    position: absolute;
-    top: 100px; /* sesuaikan */
-    left: 50%;
-    transform: translateX(-50%);
-    animation: flicker 0.2s infinite alternate;
-    cursor: pointer;
-  }
+    .candle-1 { left: 40%; }
+    .candle-2 { left: 50%; }
+    .candle-3 { left: 60%; }
 
-  @keyframes flicker {
-    from { opacity: 1; transform: translateX(-50%) scale(1); }
-    to   { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
-  }
+    .flame {
+      width: 16px;
+      height: 24px;
+      background: radial-gradient(circle, #ffeb3b 20%, #ff9800 60%, transparent 80%);
+      border-radius: 50% 50% 20% 20%;
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.3s infinite alternate;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff9800;
+    }
 
-
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.1); opacity: 0.9; }
+    }
 
     .progress-bar {
       width: 80%;
@@ -134,30 +173,33 @@
     }
 
     @keyframes loadBar {
-      to {
-        width: 100%;
-      }
+      to { width: 100%; }
     }
   </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
 
   <!-- LOADING SCREEN -->
-  <div id="loading" class="hidden text-center">
-    <!-- CAKE SVG -->
-    <!-- KUE 3D -->
-      <div class="cake">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <!-- Lilin -->
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-
-        <div class="icing"></div>
+  <div id="loading" class="text-center">
+    <!-- CAKE -->
+    <div class="cake">
+      <div class="plate"></div>
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
+      <div class="icing">
+        <div class="sprinkles"></div>
       </div>
+      <div class="candle candle-1">
+        <div class="flame"></div>
+      </div>
+      <div class="candle candle-2">
+        <div class="flame"></div>
+      </div>
+      <div class="candle candle-3">
+        <div class="flame"></div>
+      </div>
+    </div>
 
     <!-- PROGRESS BAR -->
     <div class="progress-bar">
@@ -175,31 +217,33 @@
     </button>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
   <script>
     function startLoading() {
-      // Hide card, show loading
       document.getElementById('card').style.display = 'none';
       document.getElementById('loading').classList.remove('hidden');
-
-      // Save flag for autoplay
       localStorage.setItem('openByLetter', 'yes');
-
-      // Wait until progress bar finishes
       setTimeout(() => {
         window.location.href = './main.html';
-      }, 2800); // sama dengan durasi loading bar
+      }, 2800);
     }
+
+    // Track extinguished flames
+    let flamesExtinguished = 0;
+    const flames = document.querySelectorAll(".flame");
+    flames.forEach(flame => {
+      flame.addEventListener("click", function () {
+        this.style.display = "none";
+        flamesExtinguished++;
+        if (flamesExtinguished === flames.length) {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }
+      });
+    });
   </script>
-
-  <!-- Tambahkan confetti library (CDN) -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
-
-<!-- Script interaksi lilin -->
-<script>
-  document.querySelector(".flame").addEventListener("click", function () {
-    this.style.display = "none"; // hilangkan api
-    confetti(); // efek confetti 🎉
-  });
-</script>
 </body>
 </html>

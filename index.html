@@ -85,6 +85,37 @@
           z-index: 1;
         }
 
+    .candle {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 40px;
+  background: #fff;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.flame {
+    width: 20px;
+    height: 30px;
+    background: radial-gradient(circle, orange 40%, red 70%, transparent 80%);
+    border-radius: 50% 50% 50% 50%;
+    position: absolute;
+    top: 100px; /* sesuaikan */
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flicker 0.2s infinite alternate;
+    cursor: pointer;
+  }
+
+  @keyframes flicker {
+    from { opacity: 1; transform: translateX(-50%) scale(1); }
+    to   { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+  }
+
+
 
     .progress-bar {
       width: 80%;
@@ -120,6 +151,11 @@
         <div class="layer layer-bottom"></div>
         <div class="layer layer-middle"></div>
         <div class="layer layer-top"></div>
+        <!-- Lilin -->
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+
         <div class="icing"></div>
       </div>
 
@@ -154,5 +190,16 @@
       }, 2800); // sama dengan durasi loading bar
     }
   </script>
+
+  <!-- Tambahkan confetti library (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
+
+<!-- Script interaksi lilin -->
+<script>
+  document.querySelector(".flame").addEventListener("click", function () {
+    this.style.display = "none"; // hilangkan api
+    confetti(); // efek confetti 🎉
+  });
+</script>
 </body>
 </html>

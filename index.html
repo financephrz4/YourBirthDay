@@ -10,123 +10,89 @@
     body {
       background: linear-gradient(135deg, #f5e1ee 0%, #f5f7fa 100%);
       font-family: 'Quicksand', sans-serif;
-      overflow: hidden;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin: 0;
+      overflow: hidden;
     }
+
     .card {
       animation: fadeIn 1s ease-in-out;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      max-width: 90%;
-      width: 450px;
-      position: relative;
-      overflow: hidden;
     }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="2" fill="%23ffb7c5"/%3E%3Ccircle cx="90" cy="20" r="3" fill="%23a29bfe"/%3E%3Ccircle cx="30" cy="80" r="2" fill="%23ff7675"/%3E%3C/svg%3E');
-      opacity: 0.2;
-      pointer-events: none;
-    }
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      color: #6b46c1;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    }
-    p {
-      color: #4a5568;
-      line-height: 1.6;
-    }
-    .btn {
-      background: linear-gradient(to right, #ed64a6, #9f7aea);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Responsive adjustments */
-    @media (max-width: 640px) {
-      .card {
-        padding: 1.5rem;
-        width: 95%;
-        margin: 1rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-      .btn {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.9rem;
-      }
+
+    .cake {
+      width: 80px;
+      margin: auto;
     }
-    @media (min-width: 641px) and (max-width: 1024px) {
-      .card {
-        padding: 2rem;
-        width: 80%;
-        max-width: 500px;
-      }
-      h1 {
-        font-size: 2.5rem;
-      }
-      p {
-        font-size: 1.125rem;
-      }
-      .btn {
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-      }
+
+    .progress-bar {
+      width: 80%;
+      height: 10px;
+      background: #e0d4f7;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 1rem auto 0;
     }
-    @media (min-width: 1025px) {
-      .card {
-        padding: 2.5rem;
-        width: 450px;
-      }
-      h1 {
-        font-size: 3rem;
-      }
-      p {
-        font-size: 1.25rem;
-      }
-      .btn {
-        padding: 0.75rem 2.5rem;
-        font-size: 1.125rem;
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: #a78bfa;
+      animation: loadBar 2.5s ease-out forwards;
+    }
+
+    @keyframes loadBar {
+      to {
+        width: 100%;
       }
     }
   </style>
 </head>
-<body>
-  <div class="card text-center">
-    <h1 class="text-4xl font-bold mb-4">Untuk Julianti Dwingsih 🎉</h1>
-    <p class="text-lg mb-6">Di hari spesialmu ini, ada secarik surat penuh harapan dan kehangatan yang menantimu. Siap membaca cerita kecil untukmu?</p>
-    <button onclick="openMainPage()" class="btn text-white py-2 px-6 rounded-full font-medium">
+<body class="flex items-center justify-center min-h-screen">
+
+  <!-- LOADING SCREEN -->
+  <div id="loading" class="hidden text-center">
+    <!-- CAKE SVG -->
+    <div class="cake mb-4">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#d8b4fe" d="M16 20h32v32H16z" />
+        <path fill="#a78bfa" d="M16 36h32v16H16z" />
+        <circle cx="32" cy="12" r="4" fill="#f472b6" />
+        <rect x="30" y="8" width="4" height="8" fill="#f9a8d4" />
+      </svg>
+    </div>
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-bar-inner"></div>
+    </div>
+    <p class="mt-4 text-purple-700 font-medium">Menyiapkan kejutan... 🎶</p>
+  </div>
+
+  <!-- CARD UTAMA -->
+  <div id="card" class="card bg-white p-8 rounded-3xl shadow-lg text-center max-w-lg mx-auto">
+    <h1 class="text-4xl font-bold mb-4 text-purple-700">Untuk Julianti Dwingsih 🎉</h1>
+    <p class="text-lg mb-6 text-gray-700">Di hari spesialmu ini, ada secarik surat penuh harapan dan kehangatan yang menantimu. Siap membaca cerita kecil untukmu?</p>
+    <button onclick="startLoading()" class="btn bg-gradient-to-r from-pink-400 to-purple-400 text-white py-2 px-6 rounded-full font-medium">
       Buka Suratmu 💖
     </button>
   </div>
 
   <script>
-    function openMainPage() {
+    function startLoading() {
+      // Hide card, show loading
+      document.getElementById('card').style.display = 'none';
+      document.getElementById('loading').classList.remove('hidden');
+
+      // Save flag for autoplay
       localStorage.setItem('openByLetter', 'yes');
-      window.location.href = './main.html';
+
+      // Wait until progress bar finishes
+      setTimeout(() => {
+        window.location.href = './main.html';
+      }, 2800); // sama dengan durasi loading bar
     }
   </script>
 </body>
